@@ -88,37 +88,20 @@ class _Main_StfulState extends State<Main_Stful> {
         elevation: 0.0, //위젯의 높이. 숫자가 클수록 앱바가 떠 있는 효과. (그림자로 효과주는듯)
       ),
 
-      body: Builder(builder: (BuildContext ctx) {
-        return  Center(  //이 센터랑 패딩이랑 같이 못쓰나..? 왜 안돼냐
-          //  Padding( padding : EdgeInsets.fromLTRB(30, 40, 0, 0),
-          child: Column(  //정렬하기 전에는, 위에 붙어 있어서, ali 까지 치면 main,cross aligment 이렇게 2개 나옴.
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('2의 배수', style: TextStyle(fontSize: 30),),
-              SizedBox(height: 30,),  //세로간격 위 아래 15px 씩 넓힘
-              Text(_message.toString(), style: TextStyle(fontSize: 30),),
-              RaisedButton(     //Raised button, Floating action button
-                onPressed: (){
-                  //스낵바를 함수로 만들면 굳이 Builder 를 선언할 필요가 없어짐. (코딩셰프 강좌 19)
-                  Scaffold.of(ctx).showSnackBar(SnackBar( //
-                    content: Text('Hello',
-                      textAlign: TextAlign.center,),
-                    duration: Duration(seconds: 1),
-                    backgroundColor: Colors.teal,
-                  ));
-                },
-                child: Text('Show me!',
-                  style: TextStyle(
-                      color: Colors.black
-                  ),
-                ),
-                color: Colors.red[100],
-              )
-            ],
-          ),
-          //  ),
-        );
-      }),
+      body:Center(  //이 센터랑 패딩이랑 같이 못쓰나..? 왜 안돼냐
+        //  Padding( padding : EdgeInsets.fromLTRB(30, 40, 0, 0),
+        child: Column(  //정렬하기 전에는, 위에 붙어 있어서, ali 까지 치면 main,cross aligment 이렇게 2개 나옴.
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('2의 배수', style: TextStyle(fontSize: 30),),
+            SizedBox(height: 30,),  //세로간격 위 아래 15px 씩 넓힘
+            Text(_message.toString(), style: TextStyle(fontSize: 30),),
+            MySnackBar(),
+          ],
+        ),
+        //  ),
+      ),
+
       //    )
       drawer: Drawer(
         child : ListView(
@@ -175,6 +158,32 @@ class _Main_StfulState extends State<Main_Stful> {
   }
 }
 
+class MySnackBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: FlatButton(
+        onPressed: (){
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('This is SnackBar',
+              textAlign: TextAlign.center,
+              style: TextStyle( color:  Colors.white),
+            ),
+            backgroundColor: Colors.teal,
+            duration: Duration(milliseconds: 1800),
+          )
+          );
+        },
+        child: Text('Flat btn',
+          style: TextStyle(
+              color: Colors.black87
+          ),
+        ),
+        color: Colors.teal,
+      ),
+    );
+  }
+}
 
 
 void flutterToast(){
