@@ -1,71 +1,35 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_app/ScreenA.dart';
+//import를 위처럼 안해도 되네??????????????
+import 'ScreenA.dart';
+import 'ScreenB.dart';
+import 'ScreenC.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+      //### MaterialApp 을 보면, routes 와 initialRoute 아규먼트가 있는데,
+      //    멀티페이지 만들 때 필요한 역할!
+      //    initialRoute 는 멀티페이지 이동을 할 때 화면에 제일 처음 출력되는 route를 불러오는 역할을 함.
+      //    (즉, home 아규먼트와 똑같은 역할을 하는 것.)
+      //    따라서, home 대신에 initialRoute를 사용한다.
+      //    따라서2, home과 initialRoute 는 동시에 존재할 수 없다.
+      //### route 아규먼트는 이동할 페이지들의 이름을 지정하고 생성하는 역할. (Map자료형)
 
-        primarySwatch: Colors.blue,
-
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: FirstPage(),
+      //플러터 에서는 첫 route의 이름은 '/' 슬래쉬 이다.
+      initialRoute : '/',
+      routes: {
+        '/' : (context) => ScreenA(),
+        '/b' :(context) => ScreenB(),
+        '/c' :(context) => ScreenC(),
+      },
     );
   }
 }
-
-class FirstPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Scaffold 위젯을 리턴하는 모든 커스텀 위젯 하나하나가 라우트(Route) 라고 볼 수 있다.
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('First page'),
-      ),
-      body: Center(
-        child: RaisedButton(
-            child: Text('Go to the Second page'),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(
-                //아래에서, context를 사용하지 않기 때문에, (_) 를 대신 사용할 수 있다.
-                //이유 : SecondPage 의 ctx FirstPage의 context와는 다르기 때문!
-                //예시 : builder : (_) => SecondPage();
-                  builder: (BuildContext context){
-                    return SecondPage();
-                  }));
-            }),
-      ),
-    );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext ctx) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Second page'),
-      ),
-      body: Center(
-        //stack 으로 쌓인 페이지는 플러터가 자동으로 뒤로가기 키를 만들어 주기 때문에,
-        //굳이 pop을 만들지 않아도 된다. (--단, appbar가 존재해야한다.)
-        child: RaisedButton(
-            child: Text('Go to the First page'),
-            onPressed: (){
-              Navigator.pop(ctx);
-            }),
-      ),
-    );
-  }
-}
-
 
 
 
