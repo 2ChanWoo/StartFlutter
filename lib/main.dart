@@ -97,6 +97,14 @@ class _Main_StfulState extends State<Main_Stful> {
             SizedBox(height: 30,),  //세로간격 위 아래 15px 씩 넓힘
             Text(_message.toString(), style: TextStyle(fontSize: 30),),
             MySnackBar(),
+
+            FlatButton(onPressed: (){
+             return flutterToast();
+              print('aaa');
+              },
+              child: Text('Toast Btn'),
+              color: Colors.cyan,
+            )
           ],
         ),
         //  ),
@@ -190,4 +198,12 @@ void flutterToast(){
   // 코딩셰프 19강  
   // 기능 삭제된듯..
   //Fluttertoast.
+
+  Fluttertoast.showToast(msg: 'This is Toast!',
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: Colors.redAccent,
+    fontSize: 20,
+    textColor: Colors.white,
+    toastLength: Toast.LENGTH_SHORT,
+  );
 }
